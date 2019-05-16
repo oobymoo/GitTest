@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Book {
+	
 	private String no;
 	private String name;
 	private String author;
