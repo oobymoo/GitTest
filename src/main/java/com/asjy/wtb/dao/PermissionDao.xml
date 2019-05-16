@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.asjy.wtb.dao.PermissionDao">
+<resultMap type="com.asjy.wtb.model.Permission" id="permission">
+	<result column="majorpermission" property="permissionName"/>
+	<collection ofType="com.asjy.wtb.model.Permission" property="minorPermissinoList">
+	  <result column="minorpermission" property="permissionName"/>
+	  <result column="minorpermissionurl" property="permissionUrl"/>
+	</collection>
+	</resultMap>
+	<select id="majorPermissionList" resultMap="permission">
+		select
+			major.permissionname majorpermission, <!--此处的别名majorpermission，是不是只为了上面的resultmap标签对应实体类-->
+			minor.permissionname minorpermission,
+			minor.permissionurl minorpermissionurl
+		from 
+			tb_permission major
+		inner join 
+			tb_permission minor
+		on major.id=minor.parentid
+		inner join
+			tb_userpermission
+		on tb_userpermission.pid=minor.id
+		where
+			tb_userpermission.userid=#{value}
+		
+	</select>
+	<insert id="addImg">
+		insert into tb_img values(default,#{picture})
+	</insert>
+	<select id="findImg" resultType="com.asjy.wtb.model.Img">
+	select
+		id,
+		picture
+	from
+		tb_img
+	</select>
+
+</mapper>
