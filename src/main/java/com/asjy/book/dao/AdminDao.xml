@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.asjy.book.dao.AdminDao">
+<select id="findBookPageDynamic" resultType="com.asjy.book.model.Book">
+	select
+		no,
+		name,
+		author,
+		publish,
+		price,
+		store
+	from
+		tbl_book
+		<where>
+			<if test="no !='' and no !=null">
+				no like "%"#{no}"%"
+			</if>
+			<if test="name !=''and name !=null">
+				and name like "%"#{name}"%"
+			</if>
+		</where>
+		<if test="pageCount !=0"><!-- 这里用pageCount即每页显示多少条来做限定条件而不是用countPage是因为如果是第一页， 那么就是执行第一页的分页查询，根据公式得到的结果填在limit中就是从第0条开始,但是时候0不符合if中的条件了，不走其中的方法，就是显然不对了-->
+				limit #{nowpage},#{pageCount}	
+		</if>
+</select>
+<delete id="deleteBook">
+	delete 
+	from 
+		tbl_book
+	where
+		no in
+		<foreach collection="array" item="no" open="(" close=")" separator=",">
+		#{no}
+		</foreach>
+
+</delete>
+</mapper>
