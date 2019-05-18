@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hibernate.pojo">
+  <class name="Book" table="tbl_book">
+	<id name="no" column="no">
+	  <generator class="native"></generator>
+	  <!--native意味着主键采取自增的方式  -->
+	</id>
+		<property name="name"/>
+		<property name="author"/>
+		<property name="publish"/>
+		<property name="price"/>
+		<property name="store"/>
+  </class>
+</hibernate-mapping>

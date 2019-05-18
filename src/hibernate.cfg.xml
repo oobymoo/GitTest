@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+       "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<!-- 上面的头文件的格式要特别注意,使用对应的头文件形式 -->
+
+<hibernate-configuration>
+<session-factory>
+
+	<!-- 链接数据库驱动  -->
+	<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+	<property name="connection.url">jdbc:mysql://localhost:3306/asjy?characterEncoding=UTF-8</property>
+	<property name="connection.username">root</property>
+	<property name="connection.password">root</property>
+
+
+	<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+	<!--根据不同数据库使用不同的方言, 这里dialect代表MySQL的方言 -->
+	<property name="current_session_context_class">thread</property>
+	<!-- Hibernate的事物管理方式,即一个线程 -->
+	<property name="show_sql">true</property>
+	<!-- 是在控制台否输出SQL语句 -->
+	<mapping resource="com/hibernate/pojo/Book.hbm.xml"></mapping>
+	<!-- 搜素的对应实体类的xml文件路径,包名的"."一定要用"/"来表示 -->
+
+</session-factory>
+</hibernate-configuration>
