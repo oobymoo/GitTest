@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.asjy.cloud.dao.CloudDao">
+	<select id="findUserByName" resultType="com.asjy.cloud.model.User">
+		select
+			USER_ID userId,
+			USER_NAME userName,
+			PASSWORD Password,
+			USER_TYPE header
+		from
+			users
+		<where>
+		<if test="userName != ''and userName !=null">
+			USER_NAME=#{userName}
+		</if>
+		</where>
+			
+	</select>
+	<select id="findProjectByNameAndPage" resultType="com.asjy.cloud.model.Project">
+	select 
+		PRO_ID proId,
+		PRO_NAME proName,
+		START_TIME startTime,
+		END_TIME endTime,
+		HEADER header
+	from
+		project
+		<where >
+		<if test="proName !=''and proName =null">
+	PRO_NAME like
+		"%"#{PRO_NAME}"%"
+		</if>
+		</where>
+		<if test="pagecount != 0">
+	limit 
+		#{startNumber},#{pagecount}
+		</if>
+	</select>
+	
+</mapper>
