@@ -29,7 +29,7 @@ public class HibernateTest {
 		s.getTransaction().commit();
 		
 		Book book1=(Book)s.get(Book.class,2);
-		//获取到数据库中no=2的结果装进book1对象中
+		//获取到数据库中no=2的结果装进book1对象中 
 		System.err.println(book1.getNo());
 		System.err.println(book1.getName());
 		System.err.println(book1.getPublish());
