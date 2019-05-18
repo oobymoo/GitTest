@@ -27,6 +27,14 @@ public class HibernateTest {
 		s.save(book);
 		//调用session的save方法把对象结果保存到数据库中
 		s.getTransaction().commit();
+		
+		Book book1=(Book)s.get(Book.class,2);
+		//获取到数据库中no=2的结果装进book1对象中
+		System.err.println(book1.getNo());
+		System.err.println(book1.getName());
+		System.err.println(book1.getPublish());
+		System.err.println(book1.getPrice());
+		System.err.println(book1.getStore());
 		//提交事物
 		s.close();
 		sf.close();
